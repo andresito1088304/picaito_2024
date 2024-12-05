@@ -394,6 +394,23 @@ app.get('/pago', (req, res) => {
 });
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Código de manejo de la solicitud para la ruta '/'
 app.get('/', (req, res) => {
     res.render('index', { msg: 'ESTO ES UN MENSAJE DESDE NODE' });  
@@ -605,18 +622,30 @@ app.post('/cancelar_reserva', async (req, res) => {
 
 
 
+
+
 // Obtener las reservas de un usuario de manera asíncrona
 async function obtenerReservasUsuarioAsync(idUsuario) {
+    // Retorna una nueva promesa que maneja la operación asíncrona
     return new Promise((resolve, reject) => {
+        // Utiliza la conexión (supuestamente a una base de datos) para realizar la consulta
         connection.query('SELECT * FROM reservas WHERE id_usuario = ?', [idUsuario], (error, results) => {
+            // Callback: se ejecuta cuando se completa la consulta
+
+            // Si hay un error en la consulta, rechaza la promesa con el error
             if (error) {
                 reject(error);
             } else {
+                // Si la consulta es exitosa, resuelve la promesa con los resultados
                 resolve(results);
             }
         });
     });
 }
+
+
+
+
 
 // Cancelar una reserva de manera asíncrona
 async function cancelarReservaAsync(idReserva, idCancha) {
@@ -825,7 +854,7 @@ app.post('/register', async (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, (req, res) => {
     console.log(`Servidor corriendo en puerto ${PORT}`);
 });
